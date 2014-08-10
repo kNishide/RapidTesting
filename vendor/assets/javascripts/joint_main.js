@@ -4,28 +4,30 @@
     var paper = new joint.dia.Paper({
       el: $('#myholder'),
       width: $(window).width(),
-      height: 1000,
+      height: $(window).height(),
       model: graph,
       gridSize: 1
     });
 
     paper.on('blank:pointerdblclick', function(evt, x, y) {
-      var rect = createNewPage(x, y);
-      graph.addCells([rect]);
+      var page = createNewPage(x, y);
+      graph.addCells([page]);
     })
+
+    paper.on('cell:pointerclick', function(cellView, evt, x, y) {
+      var graphScale = 2.5;
+      var bbox = cellView.getBBox();
+      paper.scale(graphScale, graphScale, x, y);
+    });
   });
 })();
 
 function createNewPage(x, y) {
-  var rect = new joint.shapes.basic.Rect({
+  var page = new joint.shapes.basic.Rect({
     position: { x: x, y: y },
-    size: { width: 100, height: 130 },
+    size: { width: 200, height: 260 },
     attrs: { rect: { fill: 'gray' }, text: { text: 'Page', fill: 'white' } }
   });
 
-  rect.on('change:position', function(element) {
-    console.log(element.id, ':', element.get('position'));
-  });
-
-  return rect;
+  return page;
 }
