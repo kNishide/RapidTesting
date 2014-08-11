@@ -25,7 +25,7 @@
 function createNewPage(x, y) {
   var page = new joint.shapes.basic.Rect({
     position: { x: x, y: y },
-    size: { width: 200, height: 260 },
+    size: { width: 100, height: 130 },
     attrs: { rect: { fill: 'gray' }, text: { text: 'Page', fill: 'white' } }
   });
 
