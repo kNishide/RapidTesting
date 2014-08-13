@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require stencil
 //= require cerulean/loader
 //= require cerulean/bootswatch
 
