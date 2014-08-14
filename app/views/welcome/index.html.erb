@@ -1,16 +1,31 @@
 <%= javascript_include_tag 'joint' %>
 <%= javascript_include_tag 'joint_main' %>
 
-<div class="container main-content">
-  <div class="row">
-    <div class="col-md-3 sidebar">
-        <img draggable="true" id="ios_button" ondragstart="onDragStart(event)" src="/assets/ios_button.png" width="60" height="40"/>
-    </div><!--/.sidebar-->
-    <div class="col-md-9 content-area">
-        <div id="myholder" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondragover="onDragOver(event)" ondrop="onDrop(event)" style="border-radius: 4px; border: 3px solid gray;"></div>
-    </div><!--/.content-area-->
+
+<section id="library" class="basicbg wireframe ui-resizable" style="display: block; left: 0px; width: 423px;">
+  <div id="libTop" class="libTop">
+    <nav id="widgetGroups">
+      <input id="searchBox" type="search" placeholder="Search Library" results="5" style="">
+    </nav>
   </div>
-</div><!--/.main-content-->
+  <div id="widgets" class="basicBG">
+    <div class="viewport">
+      <section class="setHeader">
+        <header>
+          <h2>Buttons</h2>
+        </header>
+        <ol id="widgetGroupBackgrounds">
+          <li id="widget93240" class="libraryWidget ui-draggable" title="Click or drag-and-drop to add" draggable="true" ondragstart="onDragStart(event)">
+            <div class="widgetTitle">Button</div>
+          </li>
+        </ol>
+      </section>
+    </div>
+  </div>
+</section>
+
+<div id="myholder" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondragover="onDragOver(event)" ondrop="onDrop(event)"></div>
+
 
 
 

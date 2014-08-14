@@ -48,6 +48,7 @@ function createNewButton(x, y) {
  */
 
 function onDragStart(event) {
+  console.trace();
   event.dataTransfer.setData("text", event.target.id);
 }
 function onDrop(event) {

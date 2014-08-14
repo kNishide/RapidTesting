@@ -15,4 +15,5 @@
  *= require cerulean/loader
  *= require cerulean/bootswatch
  *= require common
+ *= require fluid
  */
