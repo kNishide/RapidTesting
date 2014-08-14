@@ -1,9 +1,21 @@
 <%= javascript_include_tag 'joint' %>
 <%= javascript_include_tag 'joint_main' %>
 
-<img draggable="true" id="ios_button" ondragstart="onDragStart(event)" src="/assets/ios_button.png" />
+<div class="container main-content">
+  <div class="row">
+    <div class="col-md-3 sidebar">
+        <img draggable="true" id="ios_button" ondragstart="onDragStart(event)" src="/assets/ios_button.png" width="60" height="40"/>
+    </div><!--/.sidebar-->
+    <div class="col-md-9 content-area">
+        <div id="myholder" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondragover="onDragOver(event)" ondrop="onDrop(event)" style="border-radius: 4px; border: 3px solid gray;"></div>
+    </div><!--/.content-area-->
+  </div>
+</div><!--/.main-content-->
 
-<div id="myholder" ondragenter="onDragEnter(event)" ondragleave="onDragLeave(event)" ondragover="onDragOver(event)" ondrop="onDrop(event)" style="border-radius: 4px; border: 3px solid gray;"></div>
+
+
+
+
 
 
 
