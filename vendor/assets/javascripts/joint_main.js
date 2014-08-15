@@ -35,9 +35,12 @@ function createNewPage(x, y) {
 }
 
 function createNewButton(x, y) {
+  var bt_width = 50;
+  var bt_height = 30;
   var button = new joint.shapes.basic.Rect({
-    position: { x: x, y: y },
-    size: { width: 50, height: 30 },
+    //TODO: x, y座標がずれる
+    position: { x: x - bt_width * 2, y: y - bt_height * 2 },
+    size: { width: bt_width, height: bt_height },
     attrs: { rect: { fill: 'blue' }, text: { text: 'Button', fill: 'white' } }
   });
   return button;

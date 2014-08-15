@@ -11,3 +11,7 @@ body {
     padding-top: 0;
   }
 }
+
+#myholder {
+  cursor: grabbing;
+}
