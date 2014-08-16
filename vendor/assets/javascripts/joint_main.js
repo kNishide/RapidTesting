@@ -23,27 +23,39 @@ var paper;
     //   paper.scale(graphScale, graphScale, x, y);
     // });
 
+    // First, unembed the cell that has just been grabbed by the user.
+    paper.on('cell:pointerdown', function(cellView, evt, x, y) {
+        
+        var cell = cellView.model;
+
+        if (!cell.get('embeds') || cell.get('embeds').length === 0) {
+            // Show the dragged element above all the other cells (except when the
+            // element is a parent).
+            cell.toFront();
+        }
+        
+        if (cell.get('parent')) {
+            graph.getCell(cell.get('parent')).unembed(cell);
+        }
+    });
+
+
     paper.on('cell:pointerup', function(cellView, evt, x, y) {
       // Find the first element below that is not a link nor the dragged element itself.
-      var elementBelow = graph.get('cells').find(function(cell) {
-          if (cell instanceof joint.dia.Link) return false; // Not interested in links.
-          if (cell.id === cellView.model.id) return false; // The same element as the dropped one.
-          if (cell.getBBox().containsPoint(g.point(x, y))) {
-              return true;
+      var cell = cellView.model;
+      var cellViewsBelow = paper.findViewsFromPoint(cell.getBBox().center());
+
+      if (cellViewsBelow.length) {
+          // Note that the findViewsFromPoint() returns the view for the `cell` itself.
+          var cellViewBelow = _.find(cellViewsBelow, function(c) { return c.model.id !== cell.id });
+      
+          // Prevent recursive embedding.
+          if (cellViewBelow && cellViewBelow.model.get('parent') !== cell.id) {
+              cellViewBelow.model.embed(cell);
           }
-          return false;
-      });
-      // If the two elements are connected already, don't
-      // connect them again (this is application specific though).
-      if (elementBelow && !_.contains(graph.getNeighbors(elementBelow), cellView.model)) {
-          graph.addCell(new joint.dia.Link({
-              source: { id: cellView.model.id }, target: { id: elementBelow.id },
-              attrs: { '.marker-source': { d: 'M 10 0 L 0 5 L 10 10 z' } }
-          }));
-          // Move the element a bit to the side.
-          cellView.model.translate(-200, 0);
-      }});
+      }
     });
+  })
 })();
 
 function createNewPage(x, y) {
