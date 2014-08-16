@@ -17,12 +17,33 @@ var paper;
       graph.addCells([page]);
     })
 
-    paper.on('cell:pointerclick', function(cellView, evt, x, y) {
-      var graphScale = 2.5;
-      var bbox = cellView.getBBox();
-      paper.scale(graphScale, graphScale, x, y);
+    // paper.on('cell:pointerclick', function(cellView, evt, x, y) {
+    //   var graphScale = 2.5;
+    //   var bbox = cellView.getBBox();
+    //   paper.scale(graphScale, graphScale, x, y);
+    // });
+
+    paper.on('cell:pointerup', function(cellView, evt, x, y) {
+      // Find the first element below that is not a link nor the dragged element itself.
+      var elementBelow = graph.get('cells').find(function(cell) {
+          if (cell instanceof joint.dia.Link) return false; // Not interested in links.
+          if (cell.id === cellView.model.id) return false; // The same element as the dropped one.
+          if (cell.getBBox().containsPoint(g.point(x, y))) {
+              return true;
+          }
+          return false;
+      });
+      // If the two elements are connected already, don't
+      // connect them again (this is application specific though).
+      if (elementBelow && !_.contains(graph.getNeighbors(elementBelow), cellView.model)) {
+          graph.addCell(new joint.dia.Link({
+              source: { id: cellView.model.id }, target: { id: elementBelow.id },
+              attrs: { '.marker-source': { d: 'M 10 0 L 0 5 L 10 10 z' } }
+          }));
+          // Move the element a bit to the side.
+          cellView.model.translate(-200, 0);
+      }});
     });
-  });
 })();
 
 function createNewPage(x, y) {
@@ -39,12 +60,16 @@ function createNewPage(x, y) {
 function createNewButton(x, y) {
   var bt_width = 50;
   var bt_height = 30;
-  var button = new joint.shapes.basic.Rect({
-    //TODO: x, y座標がずれる
-    position: { x: x - bt_width * 2, y: y - bt_height * 2 },
+  var button = new joint.shapes.devs.Model({
+    position: { x: x, y: y },
     size: { width: bt_width, height: bt_height },
-    attrs: { rect: { fill: 'blue' }, text: { text: 'Button', fill: 'white' } }
-  });
+    outPorts: ['push'],
+    attrs: {
+        '.label': { text: 'Button', 'ref-x': .2, 'ref-y': .2 },
+        rect: { fill: '#2ECC71' },
+        '.outPorts circle': { fill: '#E74C3C' }
+    }
+});
   return button;
 }
 
