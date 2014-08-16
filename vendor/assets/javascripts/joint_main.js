@@ -10,6 +10,9 @@ var paper;
       height: $(window).height(),
       model: graph,
       gridSize: 1,
+      defaultLink: new joint.dia.Link({
+        attrs: { '.marker-target': { d: 'M 10 0 L 0 5 L 10 10 z' } }
+      }),
       validateConnection: function(cellViewS, magnetS, cellViewT, magnetT, end, linkView) {
         // Prevent loop linking
         return (magnetS !== magnetT);
@@ -72,6 +75,7 @@ function createNewPage(x, y) {
         text: { text: 'Screen', 'font-size': 10, style: { 'text-shadow': '1px 1px 1px lightgray' } }
     }
   });
+  page.toBack();
   return page;
 }
 
@@ -85,9 +89,10 @@ function createNewButton(x, y) {
     attrs: {
         '.label': { text: 'Button', 'ref-x': .2, 'ref-y': .2 },
         rect: { fill: '#2ECC71' },
-        '.outPorts circle': { fill: '#E74C3C' }
+        '.outPorts circle': { fill: '#E74C3C', type: 'output' }
     }
-});
+  });
+  printProperties(button);
   return button;
 }
 
@@ -113,4 +118,16 @@ function onDragOver(event) {
 function onDragEnter(event) {
 }
 function onDragLeave(event) {
+}
+
+/*
+ *  Utility
+ */
+
+function printProperties(obj) {
+    var properties = '';
+    for (var prop in obj){
+        properties += prop + "=" + obj[prop] + "\n";
+    }
+    console.debug(properties);
 }
