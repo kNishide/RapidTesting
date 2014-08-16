@@ -9,7 +9,13 @@ var paper;
       width: $(window).width(),
       height: $(window).height(),
       model: graph,
-      gridSize: 1
+      gridSize: 1,
+      validateConnection: function(cellViewS, magnetS, cellViewT, magnetT, end, linkView) {
+        // Prevent loop linking
+        return (magnetS !== magnetT);
+      },
+      // Enable link snapping within 75px lookup radius
+      snapLinks: { radius: 75 }
     });
 
     paper.on('blank:pointerdblclick', function(evt, x, y) {
