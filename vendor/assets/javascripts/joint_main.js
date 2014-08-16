@@ -27,9 +27,11 @@ var paper;
 
 function createNewPage(x, y) {
   var page = new joint.shapes.basic.Rect({
-    position: { x: x, y: y },
-    size: { width: 100, height: 130 },
-    attrs: { rect: { fill: 'gray' }, text: { text: 'Page', fill: 'white' } }
+    position: { x: x, y: y }, size: { width: 100, height: 130 },
+    attrs: {
+        rect: { 'stroke-width': '5', 'stroke-opacity': .7, stroke: 'black', rx: 3, ry: 3, fill: 'lightgray', 'fill-opacity': .5 },
+        text: { text: 'Screen', 'font-size': 10, style: { 'text-shadow': '1px 1px 1px lightgray' } }
+    }
   });
   return page;
 }
