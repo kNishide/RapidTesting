@@ -52,6 +52,8 @@ var paper;
     paper.on('cell:pointerup', function(cellView, evt, x, y) {
       // Find the first element below that is not a link nor the dragged element itself.
       var cell = cellView.model;
+      if (cell instanceof joint.dia.Link) return false;
+      
       var cellViewsBelow = paper.findViewsFromPoint(cell.getBBox().center());
 
       if (cellViewsBelow.length) {
