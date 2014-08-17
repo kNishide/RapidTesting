@@ -92,7 +92,7 @@ function createNewButton(x, y) {
         '.outPorts circle': { fill: '#E74C3C', type: 'output' }
     }
   });
-  printProperties(button);
+  //printProperties(button);
   return button;
 }
 
@@ -108,8 +108,10 @@ function onDrop(event) {
   var id = event.dataTransfer.getData("text");
   var elm = document.getElementById(id);
   event.preventDefault();
-
-  var page = createNewButton(event.clientX, event.clientY);
+  var offsetX = 423;
+  var offsetY = 70;
+  var page = createNewButton(event.clientX - offsetX, event.clientY - offsetY);
+  console.debug(event);
   graph.addCells([page]);
 }
 function onDragOver(event) {
