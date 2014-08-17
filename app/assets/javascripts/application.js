@@ -16,4 +16,5 @@
 //= require stencil
 //= require cerulean/loader
 //= require cerulean/bootswatch
-
+//= require bootstrap-modal
+//= require bootstrap-modalmanager

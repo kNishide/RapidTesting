@@ -60,6 +60,10 @@ gem 'acts-as-taggable-on'      # タグ機能を実装できる
 gem 'kaminari'                 # ページャ
 gem 'rails_autolink'           # URLの自動リンク化
 
+# bootstrap
+gem 'bootstrap-modal-rails'
+gem 'twitter-bootstrap-rails-confirm'
+
 group :development do
   gem 'thin'                   # 開発用サーバ 
   gem 'rails-erd'              # モデルのER図をPDFで出力してくれる
