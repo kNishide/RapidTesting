@@ -15,3 +15,19 @@ body {
 #myholder {
   cursor: grabbing;
 }
+
+div#menu_container {  
+    position:absolute; 
+    right:100px;  
+    top:70px;  
+} 
+
+.btn {
+  background: -moz-linear-gradient(top,#BFD9E5, #63B0CF 50%,#0080B3 50%,#09C);
+  background: -webkit-gradient(linear, left top, left bottom, from(#BFD9E5), color-stop(0.5,#63B0CF), color-stop(0.5,#0080B3), to(#09C));
+  border: 1px solid #DDD;
+  color: #FFF;
+  width: 100px;
+  padding: 10px 0;
+}
+
