@@ -22,8 +22,7 @@ var paper;
     });
 
     paper.on('blank:pointerdblclick', function(evt, x, y) {
-      var page = createNewPage(x, y);
-      graph.addCells([page]);
+      addNewPage(x, y);
     })
 
     // paper.on('cell:pointerclick', function(cellView, evt, x, y) {
@@ -34,7 +33,7 @@ var paper;
 
     // First, unembed the cell that has just been grabbed by the user.
     paper.on('cell:pointerdown', function(cellView, evt, x, y) {
-        
+
         var cell = cellView.model;
 
         if (!cell.get('embeds') || cell.get('embeds').length === 0) {
@@ -42,7 +41,7 @@ var paper;
             // element is a parent).
             cell.toFront();
         }
-        
+
         if (cell.get('parent')) {
             graph.getCell(cell.get('parent')).unembed(cell);
         }
@@ -53,13 +52,13 @@ var paper;
       // Find the first element below that is not a link nor the dragged element itself.
       var cell = cellView.model;
       if (cell instanceof joint.dia.Link) return false;
-      
+
       var cellViewsBelow = paper.findViewsFromPoint(cell.getBBox().center());
 
       if (cellViewsBelow.length) {
           // Note that the findViewsFromPoint() returns the view for the `cell` itself.
           var cellViewBelow = _.find(cellViewsBelow, function(c) { return c.model.id !== cell.id });
-      
+
           // Prevent recursive embedding.
           if (cellViewBelow && cellViewBelow.model.get('parent') !== cell.id) {
               cellViewBelow.model.embed(cell);
@@ -68,6 +67,11 @@ var paper;
     });
   })
 })();
+
+function addNewPage(x, y) {
+  var page = createNewPage(x, y);
+  graph.addCells([page]);
+}
 
 function createNewPage(x, y) {
   var page = new joint.shapes.basic.Rect({
@@ -110,7 +114,7 @@ function onDrop(event) {
   var id = event.dataTransfer.getData("text");
   var elm = document.getElementById(id);
   event.preventDefault();
-  var offsetX = 423;
+  var offsetX = 100;
   var offsetY = 70;
   var page = createNewButton(event.clientX - offsetX, event.clientY - offsetY);
   console.debug(event);
