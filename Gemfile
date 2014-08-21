@@ -5,8 +5,6 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -81,7 +79,6 @@ group :development do
   gem 'awesome_print'          # プリントデバッグの出力を整形
   gem 'hirb'                   # SQLの結果を見やすく整形してくれる
   gem 'hirb-unicode'           # hirbの日本語対応
-  gem 'sqlite3'
 end
 
 group :test do
@@ -91,6 +88,9 @@ group :test do
   gem 'database_cleaner'       # テスト実行後にDBをクリア
   gem 'capybara'               # ブラウザでの操作をシミュレートしてテストができる
 end
+
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3', :group => [:development, :test]
 
 group :production do
   gem 'pg'
