@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 source 'https://rubygems.org'
 
 
@@ -65,7 +67,7 @@ gem 'bootstrap-modal-rails'
 gem 'twitter-bootstrap-rails-confirm'
 
 group :development do
-  gem 'thin'                   # 開発用サーバ 
+  gem 'thin'                   # 開発用サーバ
   gem 'rails-erd'              # モデルのER図をPDFで出力してくれる
   gem 'spring'                 # RspecなどでRailsをプリロードする
   gem 'rails_best_practices'   # Railsのベストプラクティスを教えてくれる
@@ -79,6 +81,7 @@ group :development do
   gem 'awesome_print'          # プリントデバッグの出力を整形
   gem 'hirb'                   # SQLの結果を見やすく整形してくれる
   gem 'hirb-unicode'           # hirbの日本語対応
+  gem 'sqlite3'
 end
 
 group :test do
@@ -87,6 +90,11 @@ group :test do
   gem 'factory_girl_rails'     # テストデータの生成
   gem 'database_cleaner'       # テスト実行後にDBをクリア
   gem 'capybara'               # ブラウザでの操作をシミュレートしてテストができる
+end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
 
